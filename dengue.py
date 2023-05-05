@@ -11,6 +11,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestRegressor
 
+# Michele:
 
 # load the datasets
 
@@ -19,7 +20,7 @@ labels = pd.read_csv('./data/dengue_labels_train.csv')
 
 # Drop columns not used
 
-train_features.drop('week_start_date', axis=1, inplace=True)
+features.drop('week_start_date', axis=1, inplace=True)
 
 # Encode the city column
 
@@ -27,7 +28,13 @@ train_features.drop('week_start_date', axis=1, inplace=True)
 
 # Fill missing values
 
-train_features.fillna(method='ffill', inplace=True)
+features.fillna(method='ffill', inplace=True)
+
+# Split sets:
+
+# X_train, X_test, y_train, ytest = ...
+
+# Pasquale:
 
 # Instantiate pipeline and fit model
 pipeline = make_pipeline(
@@ -35,6 +42,8 @@ pipeline = make_pipeline(
     RandomForestRegressor()
 )
 pipeline.fit(X_train, y_train)
+
+# Sergii:
 
 # Obtain predictions and score
 
