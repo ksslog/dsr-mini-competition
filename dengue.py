@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 from sklearn.pipeline import make_pipeline
-from sklearn.impute import SimpleImputer
+from sklearn.impute import KNNImputer
 from sklearn.ensemble import RandomForestRegressor
 
 # Michele:
@@ -37,7 +37,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, shuffl
 
 # Instantiate pipeline and fit model
 pipeline = make_pipeline(
-    SimpleImputer(),
+    KNNImputer(),
     RandomForestRegressor()
 )
 pipeline.fit(X_train, y_train)
