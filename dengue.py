@@ -18,20 +18,17 @@ from sklearn.ensemble import RandomForestRegressor
 features = pd.read_csv('./data/dengue_features_train.csv')
 labels = pd.read_csv('./data/dengue_labels_train.csv')
 
+# Preprocessing:
 # Drop columns not used
-
-features.drop('week_start_date', axis=1, inplace=True)
-
 # Encode the city column
-
-# ...
-
 # Fill missing values
+# ....
+# X = ...
 
-features.fillna(method='ffill', inplace=True)
+# Prepare y:
+y = labels.loc[:,'total_cases']
 
 # Split sets:
-
 # X_train, X_test, y_train, ytest = ...
 
 # Pasquale:
