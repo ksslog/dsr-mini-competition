@@ -41,7 +41,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle
 pipeline = make_pipeline(
     KNNImputer(n_neighbors=1),
     StandardScaler(),
-    ensemble.ExtraTreesRegressor(n_estimators=100)
+    ensemble.ExtraTreesRegressor()
 )
 pipeline.fit(X_train, y_train)
 

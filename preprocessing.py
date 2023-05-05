@@ -9,21 +9,21 @@ def preprocessing(features, test_features):
     # Merge the datasets before cleaning:
     all_features = pd.merge(features, test_features, how='outer')
 
-    # Drop 'week_start_date' and duplicate columns
-    all_features.drop(['week_start_date', 'precipitation_amt_mm'], axis=1, inplace=True)
+    # Drop 'year, 'week_start_date' and duplicate column 'precipitation_amt_mm'
+    all_features.drop(['year', 'week_start_date', 'precipitation_amt_mm'], axis=1, inplace=True)
    
-
     # One hot encoding for 'city'
     all_features = pd.merge(pd.get_dummies(all_features.city), all_features.drop('city', axis=1), left_index=True, right_index=True)
 
-    # Finding all the precipitation columns
-    precip_cols = [col for col in all_features.columns if 'precip' in col]
+    # Defining the columns for adding the data of the past weeks:
+    cols = all_features.columns.drop(['iq', 'sj', 'weekofyear'])
     
-    # Adding to each observation the precipation data of the past four weeks
-    for i in range(3):
-        shifted_columns = all_features[precip_cols].shift(periods=i+1)
-        shifted_columns = shifted_columns.add_suffix(str(i+1))
+    # Adding to each observation the data of the past five weeks
+    for i in range(5):
+        shifted_columns = all_features[cols].shift(periods=i+1)
+        shifted_columns = shifted_columns.add_suffix('_'+str(i+1))
         all_features = pd.concat([all_features, shifted_columns],axis=1)
-    
+         
+        
     # Return the separated datasets
     return all_features.iloc[:number_train_features], all_features.iloc[number_train_features:]
