@@ -13,10 +13,10 @@ def preprocessing(features, test_features):
     all_features.drop(['year', 'week_start_date', 'precipitation_amt_mm'], axis=1, inplace=True)
    
     # One hot encoding for 'city'
-    all_features = pd.merge(pd.get_dummies(all_features.city), all_features.drop('city', axis=1), left_index=True, right_index=True)
+    # all_features = pd.merge(pd.get_dummies(all_features.city), all_features.drop('city', axis=1), left_index=True, right_index=True)
 
     # Defining the columns for adding the data of the past weeks:
-    cols = all_features.columns.drop(['iq', 'sj', 'weekofyear'])
+    cols = all_features.columns.drop(['city', 'weekofyear'])
     
     # Adding to each observation the data of the past five weeks
     for i in range(5):
